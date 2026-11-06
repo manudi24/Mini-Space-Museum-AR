@@ -1,27 +1,26 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My AR Project</title>
+  <title>Mini Space Museum </title>
  
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
  
   <script>
-    // ---------- Component 1: tap an object to change its colour ----------
+    
     AFRAME.registerComponent('color-changer', {
       init: function () {
         const colors = ['#EF2D5E', '#FFC65D', '#4CC3D9', '#7BC8A4', '#9B59B6'];
         let index = 0;
         this.el.addEventListener('click', () => {
-          index = (index + 1) % colors.length;      // go to next colour
+          index = (index + 1) % colors.length;      
           this.el.setAttribute('color', colors[index]);
         });
       }
     });
  
-    // ---------- Component 2: show whether the marker is visible ----------
+    
     AFRAME.registerComponent('marker-status', {
     init: function () {
         const banner = document.querySelector('#status');
@@ -54,51 +53,191 @@
            arjs="sourceType: webcam; debugUIEnabled: false;">
  
     <a-assets timeout="20000">
+      <img id="astronaut" src="astro.jpg">
+      <a-assets timeout="20000">
+
+  <img id="astronaut" src="astro.jpg">
+
+  
+  <a-asset-item id="my-model"
+                src="comet.glb">
+  </a-asset-item>
+
+</a-assets>
       <a-asset-item id="duck-model"
         src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Binary/Duck.glb">
       </a-asset-item>
     </a-assets>
  
     <a-marker preset="hiro" marker-status>
+      <a-image src="#astronaut"
+         position="0 0.1 0"
+         width="0.5"
+         height="0.8">
+         <a-entity gltf-model="#my-model"
+          position="0 0.3 -1"
+          scale="0.3 0.3 0.3"
+          rotation="0 0 0">
+</a-entity>
+</a-image>
  
       <a-plane rotation="-90 0 0" width="1.6" height="1.6"
                color="#2C3E50"></a-plane>
  
-      <!-- Slowly rotating 3D duck -->
-      <a-entity gltf-model="#duck-model" position="0 0 0" scale="0.4 0.4 0.4"
-                animation="property: rotation; to: 0 360 0;
-                           dur: 8000; easing: linear; loop: true"></a-entity>
+     
  
-      <!-- Tappable, bouncing ball (class="clickable" lets the ray hit it) -->
-      <a-sphere class="clickable" color-changer
-                position="0.6 0.5 0" radius="0.2" color="#EF2D5E"
-                animation="property: position; from: 0.6 0.4 0; to: 0.6 0.8 0;
-                           dir: alternate; dur: 700;
-                           easing: easeInOutQuad; loop: true"></a-sphere>
-      <!-- Blue rotating cube -->
-<a-box position="-0.6 0.3 0"
-       color="#3498DB"
-       width="0.4"
-       height="0.4"
-       depth="0.4"
-       animation="property: rotation;
-                  to: 360 360 0;
-                  dur: 5000;
-                  loop: true">
-</a-box>
 
-<!-- Yellow cylinder -->
-<a-cylinder position="0.6 0.2 -0.5"
-             color="#F1C40F"
-             radius="0.2"
-             height="0.5">
-</a-cylinder>
+
+<a-sphere position="-0.6 0.45 -0.4"
+          radius="0.22"
+          color="#FDB813"
+          animation="property: rotation; to: 0 360 0; dur: 6000; loop: true">
+</a-sphere>
+
+<a-text value="SUN"
+        position="-0.6 0.8 -0.4"
+        align="center"
+        color="#FFFFFF"
+        width="2">
+</a-text>
+
+<a-sphere position="0 0.45 -0.6"
+          radius="0.18"
+          color="#2874A6"
+          animation="property: rotation; to: 0 360 0; dur: 5000; loop: true">
+</a-sphere>
+
+<a-text value="EARTH"
+        position="0 0.75 -0.6"
+        align="center"
+        color="#FFFFFF"
+        width="2">
+</a-text>
+
+>
+<a-sphere position="0.65 0.45 -0.4"
+          radius="0.2"
+          color="#D4AC6E">
+</a-sphere>
+
+<a-sphere position="-0.15 0.25 0.55"
+          radius="0.13"
+          color="#BFC9CA"
+          animation="property: rotation;
+                     to: 0 360 0;
+                     dur: 7000;
+                     loop: true">
+</a-sphere>
+
+<a-text value="MOON"
+        position="-0.15 0.48 0.55"
+        align="center"
+        color="#FFFFFF"
+        width="1.5">
+</a-text>
+
+
+<a-entity position="0.55 0.35 0.5">
+
+
+  <a-box color="#BDC3C7"
+         width="0.18"
+         height="0.18"
+         depth="0.18">
+  </a-box>
+
+  
+  <a-box position="-0.23 0 0"
+         color="#2874A6"
+         width="0.25"
+         height="0.04"
+         depth="0.16">
+  </a-box>
+
+  
+  <a-box position="0.23 0 0"
+         color="#2874A6"
+         width="0.25"
+         height="0.04"
+         depth="0.16">
+  </a-box>
+
  
-      <a-text value="Hello AR!" position="0 1.4 0" align="center"
-              width="3" color="#FFFFFF"></a-text>
+  <a-cylinder position="0 0.16 0"
+              color="#F1C40F"
+              radius="0.015"
+              height="0.15">
+  </a-cylinder>
+
+</a-entity>
+
+<a-entity position="-0.65 0.15 0.5"
+          animation="property: rotation;
+                     to: 0 360 0;
+                     dur: 10000;
+                     loop: true">
+
+  <a-cylinder position="0 0.22 0"
+              radius="0.09"
+              height="0.42"
+              color="#EAECEE">
+  </a-cylinder>
+
+  <a-cone position="0 0.48 0"
+          radius-bottom="0.09"
+          height="0.18"
+          color="#E74C3C">
+  </a-cone>
+
+  <a-cone position="0 -0.08 0"
+          radius-bottom="0.09"
+          height="0.18"
+          color="#F39C12">
+  </a-cone>
+
+  <a-sphere position="0 0.25 0.085"
+            radius="0.045"
+            color="#3498DB">
+  </a-sphere>
+
+</a-entity>
+
+<a-text value="ROCKET"
+        position="-0.65 0.75 0.5"
+        align="center"
+        color="#21D4E7"
+        width="1.5">
+</a-text>
+
+
+<a-text value="SATELLITE"
+        position="0.55 0.65 0.5"
+        align="center"
+        color="#21D4E7"
+        width="1.5">
+</a-text>
+
+<a-torus position="0.65 0.45 -0.4"
+         rotation="90 0 0"
+         radius="0.3"
+         radius-tubular="0.025"
+         color="#F5D6A0">
+</a-torus>
+
+<a-text value="SATURN"
+        position="0.65 0.8 -0.4"
+        align="center"
+        color="#FFFFFF"
+        width="2">
+</a-text>
+      <a-text value="MINI SPACE MUSEUM"
+        position="0 1.5 0"
+        align="center"
+        width="4"
+        color="#21D4E7"></a-text>
     </a-marker>
  
-    <!-- Camera + "tap" detection (cursor uses the touch / mouse position) -->
+   
     <a-entity camera
               cursor="rayOrigin: mouse"
               raycaster="objects: .clickable"></a-entity>
